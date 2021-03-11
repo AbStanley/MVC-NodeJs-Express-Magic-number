@@ -1,0 +1,22 @@
+doctype
+html 
+    link(rel="stylesheet", href="./styles.css")
+    h1 Guess My Number!
+    - if (gameover)
+        form(action="./reset")
+            p You got it in #{guesses.length} guesses!
+            input(type="Submit" value="Play Again")
+    - else
+        form(method="post")
+            - if (error)
+                p(class="error") #{error} is not a number!
+            p
+                | Guess:   
+                input(type="text", name="guess", autofocus)
+                |  
+                input(type="submit", value="Go")
+    - if (guesses.length > 0)
+        p Here are your guesses so far:
+        ul
+            - for (let guess of guesses)
+                li(class=guess.hint) #{guess.guess} &mdash; #{guess.desc}
